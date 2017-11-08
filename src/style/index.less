@@ -1,0 +1,58 @@
+/**
+ * Created by Mili on 2017/11/7.
+ */
+
+// 预设
+@viewDirection: .4s;
+
+body {
+  background-color: #f8f8f8;
+
+  #app {
+    .height(100%);
+    position: relative;
+
+    section {
+      .height(100%);
+      .boxSizing();
+    }
+  }
+}
+
+// router-view进出场transition
+.viewRightIn-enter,
+.viewLeftIn-leave-to {
+  transform: translateX(100%);
+}
+
+.viewRightIn-leave-to,
+.viewLeftIn-enter {
+  transform: translateX(-100%);
+}
+
+.viewFadeIn-enter,
+.viewFadeIn-leave-to {
+  opacity: 0;
+}
+
+.viewRightIn-enter-active,
+.viewRightIn-leave-active,
+.viewLeftIn-enter-active,
+.viewLeftIn-leave-active {
+  .width(100%);
+  position: absolute;
+  transition: transform @viewDirection;
+}
+
+.viewFadeIn-enter-active,
+.viewFadeIn-leave-active {
+  transition: opacity @viewDirection;
+}
+
+// common
+@import "base";
+@import "common";
+
+// views
+@import "views/hello";
+@import "views/coupon";
