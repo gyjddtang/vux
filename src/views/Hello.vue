@@ -1,17 +1,15 @@
 <template>
   <section class="helloContainer">
-    <XButton @click.native="goTo" type="primary">页面跳转</XButton>
+    <XButton @click.native="goTo" type="primary">领 券</XButton>
   </section>
 </template>
 
 <script>
-  import { Group, Cell, XButton } from 'vux'
+  import { XButton } from 'vux'
 
   export default {
     name: 'hello',
     components: {
-      Group,
-      Cell,
       XButton
     },
     data () {
