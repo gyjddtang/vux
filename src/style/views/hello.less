@@ -3,5 +3,54 @@
  */
 
 .helloContainer {
-  .fBox();
+  .fBox(@dire: column);
+
+  .bigTitle {
+    .width(60%);
+    .marginT(50px);
+  }
+
+  .point {
+    .font(16px, @whiteC, 20px);
+    text-align: center;
+  }
+
+  .redPacket {
+    .width(80%);
+    .fBox(@dire: column, @justify: flex-start);
+
+    .title {
+      .font(15px, @textC2, 45px);
+    }
+
+    .money {
+      .font(40px, #ffb401, 80px);
+
+      span {
+        .font(17px, #ffb401)
+      }
+    }
+
+    .getButton {
+      .width(74px);
+      .height(74px);
+      .border(3px, @whiteC, 50%);
+      .font(18px, @whiteC, 24px);
+      .fBox(@justify: center);
+      .marginB(50px);
+      background: @themeC;
+      box-shadow: 3px 3px 3px rgba(0, 0, 0, .2);
+      user-select: none;
+      cursor: pointer;
+    }
+
+    .getButton:active {
+      background: darken(@themeC, 10%);
+    }
+  }
+
+  .footerLogo {
+    .marginB(10px);
+    .width(110px);
+  }
 }

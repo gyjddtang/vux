@@ -5,9 +5,10 @@
 //预设
 @baseNum: 12px;     // rem基数
 @whiteC: #fff;      // 白色
-@themeC: #FFC80B;   // 主题色
-@textC1: #8492a6;   // text Color
-@textC2: #ff6b38;   // text Color
+@themeC: #ffaf32;   // 主题色
+@textC1: #333;   // text Color
+@textC2: #666;   // text Color
+@textC3: #999;   // text Color
 
 /****
  ** 弹性盒子
@@ -149,9 +150,14 @@
 }
 
 //边框
-.border (@width: 1px, @color, @radio: 0, @type: solid) {
+.border (@width: 1px, @color, @radio: 0px, @type: solid) when (ispixel(@radio)) {
   border: @type unit(@width / @baseNum, rem) @color;
   border-radius: unit(@radio / @baseNum, rem);
+}
+
+.border (@width: 1px, @color, @radio, @type: solid) when (ispercentage(@radio)) {
+  border: @type unit(@width / @baseNum, rem) @color;
+  border-radius: @radio
 }
 
 .borderRa (@radio) when (ispixel(@radio)) {
@@ -176,5 +182,37 @@
 
 .borderR (@width: 1px, @color, @type: solid) {
   border-right: unit(@width / @baseNum, rem) @color @type;
+}
+
+.borderTLRa (@radio) when (ispixel(@radio)) {
+  border-top-left-radius: unit(@radio / @baseNum, rem);
+}
+
+.borderTLRa (@radio) when (ispercentage(@radio)) {
+  border-top-left-radius: @radio;
+}
+
+.borderTRRa (@radio) when (ispixel(@radio)) {
+  border-top-right-radius: unit(@radio / @baseNum, rem);
+}
+
+.borderTRRa (@radio) when (ispercentage(@radio)) {
+  border-top-right-radius: @radio;
+}
+
+.borderBLRa (@radio) when (ispixel(@radio)) {
+  border-bottom-left-radius: unit(@radio / @baseNum, rem);
+}
+
+.borderBLRa (@radio) when (ispercentage(@radio)) {
+  border-bottom-left-radius: @radio;
+}
+
+.borderBRRa (@radio) when (ispixel(@radio)) {
+  border-bottom-right-radius: unit(@radio / @baseNum, rem);
+}
+
+.borderBRRa (@radio) when (ispercentage(@radio)) {
+  border-bottom-right-radius: @radio;
 }
 

@@ -1,0 +1,14 @@
+/**
+ * Created by MiliGao on 2017/11/21.
+ */
+
+/*领取优惠券背景*/
+.helloContainer {
+  background: url("../img/coupon_bg.jpg") no-repeat;
+  background-size: 100% 100%;
+}
+
+.redPacket {
+  background: url("../img/red_packet.png") no-repeat;
+  background-size: 100% 100%;
+}

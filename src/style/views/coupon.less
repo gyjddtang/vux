@@ -3,71 +3,134 @@
  */
 
 .couponContainer {
-  .padding(20px);
+  .padding(25px);
 
-  .coupon {
-    .fBox(@dire: column, @justify: center);
-    .height(270px);
-    background: @whiteC;
-    box-shadow: rgba(0, 0, 0, .2) 0 0 10px 0;
+  .couponList {
+    li {
+      .marginB(25px);
 
-    .merchant {
-      .width(80px);
-      .height(80px);
-      .borderRa(50%);
-      .fBox(@justify: center);
-      background: #F4F4F4;
-      overflow: hidden;
+      .coupon {
+        background: @whiteC;
+        box-shadow: rgba(0, 0, 0, .2) 0 0 10px 0;
 
-      img {
-        .width(110%);
-      }
-    }
+        .top {
+          .font(16px, @line: 35px);
+          .padding(0, 10px);
+          font-weight: 500;
+        }
 
-    .title {
-      .font(18px, #666);
-      .marginT(30px);
-    }
+        .content {
+          .fBox();
+          .padding(10px, 0px);
 
-    .condition {
-      .font(12px, @textC1);
-      .marginT(8px);
-    }
+          .money {
+            .width(80px);
+            .font(16px);
+            text-align: center;
 
-    .getButton {
-      .width(40%);
-      .marginT(30px);
-    }
-  }
+            span {
+              .font(32px);
+              font-weight: 600;
+            }
+          }
 
-  .lacework {
-    height: 6px;
-    background: @whiteC;
-    background: radial-gradient(circle, transparent 4px, rgba(161, 161, 161, .1) 4px, rgba(161, 161, 161, .2) 5px, @whiteC 6px);
-    background-size: 12px 12px;
-    background-position: -6px 0px;
-  }
+          .detail {
+            .padding(5px, 0px);
+            .flex();
+            .borderL(1px, #e4e4e4);
+            .paddingL(10px);
 
-  .dialog-demo {
-    .weui-dialog{
-      border-radius: 8px;
+            .couponNum {
+              .font(14px, @textC1);
+            }
 
-      .dialog-title {
-        line-height: 50px;
-        color: #666;
-      }
+            .condition {
+              .font(12px, @textC2);
+              .marginT(10px);
+            }
 
-      .img-box {
-        height: 300px;
-        overflow: hidden;
-
-        img {
-          width: 100%;
+            .time {
+              .font(12px, @textC3);
+              .marginT(15px);
+            }
+          }
         }
       }
 
-      .vux-close {
-        line-height: 50px;
+      .lacework {
+        height: 6px;
+        background: @whiteC;
+        background: radial-gradient(circle, transparent 4px, rgba(161, 161, 161, .1) 4px, rgba(161, 161, 161, .2) 5px, @whiteC 6px);
+        background-size: 12px 12px;
+        background-position: -6px 0px;
+      }
+
+      &:active {
+        .coupon {
+          background: darken(@whiteC, 2%);
+        }
+      }
+    }
+  }
+
+  .dialogContainer {
+    .fBox(@dire: column, @justify: center);
+    .paddingT(128px);
+    position: relative;
+
+    .dialogLogo {
+      .width(86%);
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .main {
+      .width(100%);
+      .borderRa(20px);
+      background: @whiteC;
+
+      .title {
+        .font(18px, @textC1, 70px);
+      }
+
+      .footer {
+        .font(14px, @textC2, 60px);
+      }
+    }
+
+    .closeBar {
+      .fBox(@dire: column);
+
+      .line {
+        .width(1px);
+        .height(40px);
+        background: @whiteC;
+      }
+
+      .button {
+        .width(30px);
+        .height(30px);
+        .border(1px, @whiteC, @radio: 50%);
+        .fBox(@justify: center);
+
+        em {
+          .width(2px);
+          .height(18px);
+          display: block;
+          background: #fff;
+          transform: rotate(-45deg);
+
+          &::after {
+            .width(2px);
+            .height(18px);
+            content: "";
+            display: block;
+            background: #fff;
+            transform: rotate(90deg);
+          }
+        }
       }
     }
   }
