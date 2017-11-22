@@ -12,28 +12,41 @@
 </template>
 
 <script>
-  import { XButton } from 'vux'
+  import store from '../store'
 
   export default {
     name: 'hello',
-    components: {
-      XButton
-    },
     data () {
       return {
       }
     },
-    mounted () {
-
+    beforeRouteEnter (to, from, next) {
+      let { openid } = to.query
+      store.dispatch('coupon/receiveSign', openid)
+        .then(res => {
+          if (res.sign) {
+            next({
+              path: '/coupon',
+              query: {
+                openid: openid
+              }
+            })
+          } else {
+            next()
+          }
+        })
     },
     methods: {
       receiveCoupon () {
-        this.$vux.loading.show({
-          text: '加载中…'
-        })
-//        this.$router.push({
-//          name: 'Coupon'
+//        this.$vux.loading.show({
+//          text: '处理中…'
 //        })
+        this.$router.push({
+          path: '/coupon',
+          query: {
+            openid: this.$route.query.openid
+          }
+        })
       }
     }
   }
