@@ -7,7 +7,10 @@
     <ul class="couponList">
       <li v-for="(item, index) of dataSource" :key="'liet' + index" @click="showDetail(item)">
         <div class="coupon">
-          <h3 class="top" :style="{ background: couponColor[item.ticketType - 1] }">{{ item.name }}</h3>
+          <div class="top" :style="{ background: couponColor[item.ticketType - 1] }">
+            <h3 class="text">{{ item.name }}</h3>
+            <div class="arrow"></div>
+          </div>
           <div class="content">
             <div class="money" :style="{ color: couponColor[item.ticketType - 1] }">¥<span :style="{ color: couponColor[item.ticketType - 1] }">{{ item.money }}</span></div>
             <div class="detail">
@@ -27,11 +30,11 @@
       <div slot="default" class="dialogContainer">
         <img src="../assets/dialog_top.png" alt="国资商城" class="dialogLogo">
         <div class="main">
-          <h2 class="title">滴滴专车券</h2>
-          <Qrcode value="2017112100001" :size="180"></Qrcode>
-          <p class="footer">券号：2017112100001</p>
+          <h2 class="title">{{ dialogData.name }}</h2>
+          <Qrcode :value="dialogData.number + ''" :size="180"></Qrcode>
+          <p class="footer">券号：{{ dialogData.number }}</p>
         </div>
-        <div class="closeBar">
+        <div class="closeBar" @click="showDialog = false">
           <div class="line"></div>
           <div class="button"><em></em></div>
         </div>
@@ -53,7 +56,7 @@
       return {
         couponColor: ['#e8342f', '#F59B0F', '#24B5AD'],
         showDialog: false,
-        dialogData: void 0,
+        dialogData: {},
         dataSource: [
           {
             name: '滴滴专车券',
@@ -72,7 +75,7 @@
           }, {
             name: '国资优惠券',
             money: 100,
-            number: 2017112100002,
+            number: 2017112100003,
             condition: '满400元可使用，可叠加',
             time: '2017-12-31',
             ticketType: 1

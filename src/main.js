@@ -6,6 +6,9 @@ import App from './App'
 import router from './router'
 import store from './store'
 import './router/permission'
+import { LoadingPlugin } from 'vux'
+
+Vue.use(LoadingPlugin)
 
 FastClick.attach(document.body)
 

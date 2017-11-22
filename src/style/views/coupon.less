@@ -14,9 +14,37 @@
         box-shadow: rgba(0, 0, 0, .2) 0 0 10px 0;
 
         .top {
-          .font(16px, @line: 35px);
+          .height(38px);
           .padding(0, 10px);
-          font-weight: 500;
+          .fBox(@dire: row);
+
+          .text {
+            .font(16px);
+          }
+
+          .arrow {
+            &::before {
+              .width(2px);
+              .height(8px);
+              .borderRa(2px);
+              content: "";
+              display: block;
+              background: fade(@whiteC, 70%);
+              transform-origin: bottom right;
+              transform: rotate(-45deg);
+            }
+
+            &::after {
+              .width(2px);
+              .height(8px);
+              .borderRa(2px);
+              content: "";
+              display: block;
+              background: fade(@whiteC, 70%);
+              transform-origin: top right;
+              transform: rotate(45deg);
+            }
+          }
         }
 
         .content {
@@ -24,7 +52,7 @@
           .padding(10px, 0px);
 
           .money {
-            .width(80px);
+            .width(25%);
             .font(16px);
             text-align: center;
 
@@ -37,15 +65,15 @@
           .detail {
             .padding(5px, 0px);
             .flex();
-            .borderL(1px, #e4e4e4);
             .paddingL(10px);
+            border-left: 1px #e4e4e4 solid;
 
             .couponNum {
               .font(14px, @textC1);
             }
 
             .condition {
-              .font(12px, @textC2);
+              .font(12px, @textC2, 16px);
               .marginT(10px);
             }
 
@@ -60,7 +88,8 @@
       .lacework {
         height: 6px;
         background: @whiteC;
-        background: radial-gradient(circle, transparent 4px, rgba(161, 161, 161, .1) 4px, rgba(161, 161, 161, .2) 5px, @whiteC 6px);
+        background: radial-gradient(circle, transparent 4px, rgba(195, 195, 195, .2) 5px, @whiteC 6px);
+        //background: radial-gradient(circle, transparent 6px, @whiteC 6px);
         background-size: 12px 12px;
         background-position: -6px 0px;
       }
@@ -79,7 +108,7 @@
     position: relative;
 
     .dialogLogo {
-      .width(86%);
+      .width(85%);
       position: absolute;
       top: 0;
       left: 50%;
@@ -104,16 +133,17 @@
       .fBox(@dire: column);
 
       .line {
-        .width(1px);
         .height(40px);
+        width: 1px;
         background: @whiteC;
       }
 
       .button {
         .width(30px);
         .height(30px);
-        .border(1px, @whiteC, @radio: 50%);
         .fBox(@justify: center);
+        .borderRa(50%);
+        border: 1px @whiteC solid;
 
         em {
           .width(2px);

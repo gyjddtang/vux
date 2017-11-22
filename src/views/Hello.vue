@@ -23,11 +23,17 @@
       return {
       }
     },
+    mounted () {
+
+    },
     methods: {
       receiveCoupon () {
-        this.$router.push({
-          name: 'Coupon'
+        this.$vux.loading.show({
+          text: '加载中…'
         })
+//        this.$router.push({
+//          name: 'Coupon'
+//        })
       }
     }
   }
