@@ -2,28 +2,52 @@
  * Created by MiliGao on 2017/11/22.
  */
 
-import { queryUser } from '../../api/coupon'
+import { checkQualify, couponReceive, couponQuery } from '../../api/coupon'
 
 let coupon = {
   namespaced: true,
   state: {
+    active: {},
     couponList: []
   },
   mutations: {
-    save (state, payload) {
+    SAVE (state, payload) {
       for (let key in payload) {
         state[key] = payload[key]
       }
     }
   },
   actions: {
-    receiveSign ({ commit }, payload) {
+    checkQualify ({ commit }, payload) {
       return new Promise((resolve, reject) => {
-        queryUser(payload)
-          .then(({ data, success }) => {
-            if (success) resolve(data)
+        checkQualify(payload)
+          .then(res => {
+            let { activityName, description, valid } = res.body
+            commit('SAVE', {
+              active: { activityName, description }
+            })
+            resolve(valid)
           })
       })
+    },
+
+    couponReceive ({ commit }, payload) {
+      return new Promise((resolve, reject) => {
+        couponReceive(payload)
+          .then(res => {
+            resolve(res)
+          })
+      })
+    },
+
+    couponQuery ({ commit }, payload) {
+      couponQuery(payload)
+        .then(res => {
+          console.log(res)
+          commit('SAVE', {
+            couponList: res.tickets
+          })
+        })
     }
   }
 }

@@ -5,7 +5,8 @@
 let app = {
   namespaced: true,
   state: {
-    viewDirection: 'refresh'   // forward: right-in, back: left-in, refresh: fade-in
+    viewDirection: 'refresh',   // forward: right-in, back: left-in, refresh: fade-in
+    loading: false
   },
   mutations: {
     SAVE (state, payload) {
@@ -18,6 +19,12 @@ let app = {
     setViewDirection ({ commit }, payload) {
       commit('SAVE', {
         viewDirection: payload
+      })
+    },
+
+    setLoading ({ commit }, payload) {
+      commit('SAVE', {
+        loading: payload
       })
     }
   }

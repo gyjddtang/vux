@@ -4,11 +4,28 @@
 
 import xAxios from '../units/xAxios'
 
-function queryUser (data) {
+function checkQualify (data) {
   return xAxios({
-    url: `/userSign?openid=${data}`,
-    method: 'GET'
+    url: `/gznbmember/api/checkQualify`,
+    method: 'POST',
+    data
   })
 }
 
-export { queryUser }
+function couponReceive (data) {
+  return xAxios({
+    url: '/gznbmember/api/couponReceive',
+    method: 'POST',
+    data
+  })
+}
+
+function couponQuery (data) {
+  return xAxios({
+    url: '/gznbmember/api/cardCouponQuery',
+    method: 'POST',
+    data
+  })
+}
+
+export { checkQualify, couponReceive, couponQuery }

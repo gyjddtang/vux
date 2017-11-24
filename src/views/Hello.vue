@@ -1,10 +1,10 @@
 <template>
   <section class="section helloContainer">
     <img src="../assets/big_title.png" alt="国资商城第三方优惠券" class="bigTitle">
-    <p class="point">恭喜您收到100元<br>第三方专属优惠券礼包</p>
+    <p class="point">{{ active.activityName }}<br><span>{{ active.description }}</span></p>
     <div class="redPacket">
       <p class="title">优惠券礼包</p>
-      <p class="money">100 <span>元</span></p>
+      <p class="money">??? <span>元</span></p>
       <div class="getButton" @click="receiveCoupon">立即<br>领取</div>
     </div>
     <img src="../assets/logo.png" alt="国资商城" class="footerLogo">
@@ -12,7 +12,9 @@
 </template>
 
 <script>
+  import { mapState, mapActions } from 'vuex'
   import store from '../store'
+  import { md5Sign } from '../units/common'
 
   export default {
     name: 'hello',
@@ -20,11 +22,35 @@
       return {
       }
     },
+    computed: {
+      ...mapState('coupon', [
+        'active'
+      ]),
+
+      ...mapState('app', [
+        'loading'
+      ])
+    },
+    watch: {
+      loading (val) {
+        if (val) {
+          this.$vux.loading.show({
+            text: '领取中…'
+          })
+        } else {
+          this.$vux.loading.hide()
+        }
+      }
+    },
     beforeRouteEnter (to, from, next) {
       let { openid } = to.query
-      store.dispatch('coupon/receiveSign', openid)
-        .then(res => {
-          if (res.sign) {
+      let data = md5Sign({
+        weixinOpenID: 'oLVPpjqs9BhvzwPj5AvTYAX3GLc'
+//        weixinOpenID: openid
+      })
+      store.dispatch('coupon/checkQualify', data)
+        .then(valid => {
+          if (!valid) {
             next({
               path: '/coupon',
               query: {
@@ -37,16 +63,24 @@
         })
     },
     methods: {
+      ...mapActions('coupon', [
+        'couponReceive'
+      ]),
+
       receiveCoupon () {
-//        this.$vux.loading.show({
-//          text: '处理中…'
-//        })
-        this.$router.push({
-          path: '/coupon',
-          query: {
-            openid: this.$route.query.openid
-          }
+        let data = md5Sign({
+          channelID: 1,
+          weixinOpenID: 'oLVPpjqs9BhvzwPj5AvTYAX3GLc'
         })
+        this.couponReceive(data)
+          .then(data => {
+            this.$router.push({
+              path: '/coupon',
+              query: {
+                openid: this.$route.query.openid
+              }
+            })
+          })
       }
     }
   }
