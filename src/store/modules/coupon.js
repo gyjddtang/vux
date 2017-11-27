@@ -22,11 +22,11 @@ let coupon = {
       return new Promise((resolve, reject) => {
         checkQualify(payload)
           .then(res => {
-            let { activityName, description, valid } = res.body
+            let { activityName, description, valid, message } = res.body
             commit('SAVE', {
               active: { activityName, description }
             })
-            resolve(valid)
+            resolve({ valid, message })
           })
       })
     },

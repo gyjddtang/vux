@@ -13,8 +13,20 @@
     name: 'app',
     computed: {
       ...mapState('app', [
-        'viewDirection'
+        'viewDirection',
+        'loading'
       ])
+    },
+    watch: {
+      loading (val) {
+        if (val) {
+          this.$vux.loading.show({
+            text: ' '
+          })
+        } else {
+          this.$vux.loading.hide()
+        }
+      }
     },
     filters: {
       directionFilter (val) {

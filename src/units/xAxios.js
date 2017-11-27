@@ -7,6 +7,7 @@ import { remoteURL } from './remote'
 import { AlertModule } from 'vux'
 import store from '../store'
 
+let storeName
 let xAxios = axios.create({
   timeout: 20000,
   baseURL: remoteURL
@@ -36,7 +37,7 @@ xAxios.interceptors.response.use(response => {
     return response.data
   }
 }, error => {
-  store.dispatch('app/setLoading', false)
+  store.dispatch('app/setLoading', { name: storeName, value: false })
   console.log('requestErr' + error)   // for debug
   return Promise.reject(error)
 })

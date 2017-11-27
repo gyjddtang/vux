@@ -13,6 +13,9 @@ let app = {
       for (let key in payload) {
         state[key] = payload[key]
       }
+    },
+    SET_LOADING (state, payload) {
+      state.loading = { ...state.loading, ...payload }
     }
   },
   actions: {

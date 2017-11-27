@@ -13,6 +13,7 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
+  import { AlertModule } from 'vux'
   import store from '../store'
   import { md5Sign } from '../units/common'
 
@@ -25,38 +26,29 @@
     computed: {
       ...mapState('coupon', [
         'active'
-      ]),
-
-      ...mapState('app', [
-        'loading'
       ])
-    },
-    watch: {
-      loading (val) {
-        if (val) {
-          this.$vux.loading.show({
-            text: '领取中…'
-          })
-        } else {
-          this.$vux.loading.hide()
-        }
-      }
     },
     beforeRouteEnter (to, from, next) {
       let { openid } = to.query
       let data = md5Sign({
-        weixinOpenID: 'oLVPpjqs9BhvzwPj5AvTYAX3GLc'
-//        weixinOpenID: openid
+//        weixinOpenID: '111222'
+        weixinOpenID: openid
       })
       store.dispatch('coupon/checkQualify', data)
-        .then(valid => {
-          if (!valid) {
+        .then(({ valid, message }) => {
+          if (valid === '0') {
             next({
               path: '/coupon',
               query: {
                 openid: openid
               }
             })
+            if (message) {
+              AlertModule.show({
+                title: '提示',
+                content: message
+              })
+            }
           } else {
             next()
           }
@@ -68,16 +60,18 @@
       ]),
 
       receiveCoupon () {
+        let { openid } = this.$route.query
         let data = md5Sign({
           channelID: 1,
-          weixinOpenID: 'oLVPpjqs9BhvzwPj5AvTYAX3GLc'
+//          weixinOpenID: '111222'
+          weixinOpenID: openid
         })
         this.couponReceive(data)
           .then(data => {
             this.$router.push({
               path: '/coupon',
               query: {
-                openid: this.$route.query.openid
+                openid: openid
               }
             })
           })

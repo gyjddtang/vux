@@ -31,6 +31,7 @@ module.exports = {
       '/gznbmember': {
         // target: 'http://10.66.18.97:9092',
         target: 'http://10.66.48.159:9092',
+        // target: 'http://membertest.gznb.com',
         changeOrigin: true,
         logLevel: 'debug'
       }

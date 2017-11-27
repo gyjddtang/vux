@@ -64,26 +64,13 @@
     computed: {
       ...mapState('coupon', [
         'couponList'
-      ]),
-
-      ...mapState('app', [
-        'loading'
       ])
     },
-    watch: {
-      loading (val) {
-        if (val) {
-          this.$vux.loading.show({
-            text: '加载中…'
-          })
-        } else {
-          this.$vux.loading.hide()
-        }
-      }
-    },
     mounted () {
+      let { openid } = this.$route.query
       let data = md5Sign({
-        weixinOpenID: 'oLVPpjqs9BhvzwPj5AvTYAX3GLc'
+//        weixinOpenID: '111222'
+        weixinOpenID: openid
       })
       this.couponQuery(data)
     },
