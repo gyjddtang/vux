@@ -26,6 +26,7 @@
     <XDialog
       v-model="showDialog"
       :dialog-style="{ background: 'transparent' }"
+      @on-hide="onHide"
     >
       <div slot="default" class="dialogContainer">
         <img src="../assets/dialog_top.png" alt="国资商城" class="dialogLogo">
@@ -67,16 +68,24 @@
       ])
     },
     mounted () {
-      let { openid } = this.$route.query
-      let data = md5Sign({
-        weixinOpenID: openid
-      })
-      this.couponQuery(data)
+      this.getData()
     },
     methods: {
       ...mapActions('coupon', [
         'couponQuery'
       ]),
+
+      getData () {
+        let { openid } = this.$route.query
+        let data = md5Sign({
+          weixinOpenID: openid
+        })
+        this.couponQuery(data)
+      },
+
+      onHide () {
+        this.getData()
+      },
 
       showDetail (item) {
         this.dialogData = item
