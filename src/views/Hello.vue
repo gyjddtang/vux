@@ -31,7 +31,6 @@
     beforeRouteEnter (to, from, next) {
       let { openid } = to.query
       let data = md5Sign({
-//        weixinOpenID: '111222'
         weixinOpenID: openid
       })
       store.dispatch('coupon/checkQualify', data)
@@ -63,7 +62,6 @@
         let { openid } = this.$route.query
         let data = md5Sign({
           channelID: 1,
-//          weixinOpenID: '111222'
           weixinOpenID: openid
         })
         this.couponReceive(data)

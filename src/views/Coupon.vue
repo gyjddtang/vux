@@ -56,7 +56,7 @@
     },
     data () {
       return {
-        couponColor: ['#e8342f', '#F59B0F', '#24B5AD'],
+        couponColor: ['#e8342f', '#F59B0F', '#24B5AD', '#1777A9', '#CB9E2E', '#ED3E96', '#EB827E'],
         showDialog: false,
         dialogData: {}
       }
@@ -69,7 +69,6 @@
     mounted () {
       let { openid } = this.$route.query
       let data = md5Sign({
-//        weixinOpenID: '111222'
         weixinOpenID: openid
       })
       this.couponQuery(data)
